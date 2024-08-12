@@ -12,7 +12,13 @@ const db = mysql.createConnection({
   host: process.env.db_host,
   user: process.env.db_user,
   password: process.env.db_password,
-  database: process.env.db_database
+  database: process.env.db_database,
+  connectTimeout: 10000, // 10 seconds
+  acquireTimeout: 10000, // 10 seconds
+  reconnect: true, // Enable reconnect
+  waitForConnections: true, // Wait for connections if pool is exhausted
+  connectionLimit: 10, // Limit the number of concurrent connections
+  queueLimit: 0 // No limit on the number of connection requests in the queue
 });
 
 db.connect((err) => {
